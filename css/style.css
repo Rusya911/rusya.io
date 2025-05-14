@@ -86,12 +86,21 @@ body::before {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   color: var(--primary-green);
+  text-align: center;
 }
 
 .hero p {
   font-size: 1.1rem;
   margin-bottom: 1rem;
   color: #cccccc;
+}
+
+/* Добавляем общие стили для всех заголовков */
+h1, h2 {
+  text-align: center;
+  animation: pulse 2s infinite;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
 }
 
 /* О мне */
@@ -102,6 +111,20 @@ body::before {
   margin: auto;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.about h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-green);
+}
+
+.about p {
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Фичи */
@@ -182,6 +205,7 @@ body::before {
   margin: auto;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .services h2 {
@@ -264,11 +288,27 @@ body::before {
   margin: auto;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .steps h2 {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--primary-green);
+  position: relative;
+  display: inline-block;
+}
+
+.steps h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-green), var(--accent-cyan));
+  border-radius: 2px;
 }
 
 .steps-list {
@@ -276,25 +316,49 @@ body::before {
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+  max-width: 600px;
+  margin: 2rem auto 0;
+  position: relative;
+}
+
+.steps-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 25px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary-green), var(--accent-cyan));
+  z-index: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .steps-list::before {
+    display: block;
+  }
 }
 
 .step {
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 12px;
-  max-width: 500px;
+  max-width: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .step:hover {
   transform: translateX(10px);
   border-color: var(--primary-green);
-  box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+  box-shadow: 0 5px 20px rgba(0, 255, 136, 0.15);
 }
 
 .step-icon {
@@ -310,6 +374,9 @@ body::before {
   font-weight: bold;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 .step:hover .step-icon {
@@ -320,6 +387,8 @@ body::before {
 .step-text {
   font-weight: 500;
   color: #e0e0e0;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 
 /* Добавляем задержки для поочередного появления */
@@ -329,12 +398,13 @@ body::before {
 .step:nth-child(4) { animation-delay: 0.4s; }
 .step:nth-child(5) { animation-delay: 0.5s; }
 
-/* Matrix секция */
+/* Матрица контакт */
 .matrix-contact {
   padding: 2rem 0;
   background: transparent;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .matrix-title {
@@ -343,15 +413,20 @@ body::before {
   left: 50%;
   transform: translateX(-50%);
   color: #ffffff;
-  font-size: 2em;
+  font-size: clamp(1.2rem, 4vw, 2rem);
   font-family: 'JetBrains Mono', monospace;
   background: rgba(0, 0, 0, 0.8);
-  padding: 15px 30px;
+  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 30px);
   border-radius: 8px;
   z-index: 2;
   text-shadow: 0 0 10px var(--primary-green);
   border: 1px solid var(--border-color);
   margin: 0;
+  width: auto;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .matrix-image-container {
@@ -461,25 +536,94 @@ footer {
   }
 
   .matrix-title {
-    font-size: 1.5em;
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
     padding: 10px 20px;
+    max-width: 80%;
+    top: 2%;
+  }
+
+  .matrix-image-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .pill-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
   }
 
   .telegram-button,
   .whatsapp-button {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    margin: 1rem;
-    width: calc(50% - 2rem);
   }
 
-  .matrix-image-container {
-    display: flex;
+  .step {
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .step-text {
+    font-size: 0.95rem;
+  }
+
+  .steps h2::after {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pill-button {
+    padding: 8px 16px;
+    font-size: 0.8em;
+  }
+  
+  .telegram-button {
+    left: 10%;
+  }
+  
+  .whatsapp-button {
+    right: 10%;
+  }
+
+  .step {
+    padding: 1rem;
     flex-direction: column;
+    text-align: center;
     align-items: center;
-    gap: 1rem;
+  }
+
+  .step-icon {
+    margin-bottom: 0.8rem;
+  }
+
+  .step-text {
+    font-size: 0.9rem;
+  }
+
+  .step:hover {
+    transform: translateY(-5px);
+  }
+
+  .matrix-title {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    padding: 8px 15px;
+    max-width: 70%;
+    top: 3%;
+    border-width: 1px;
+  }
+}
+
+@media (max-width: 320px) {
+  .matrix-title {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    max-width: 60%;
+    top: 4%;
   }
 }
 
@@ -555,6 +699,7 @@ header h1 {
   font-family: 'Inter', sans-serif;
   animation: pulse 2s infinite;
   flex: 1;
+  text-align: center;
 }
 
 .header-center {
@@ -647,9 +792,4 @@ header h1 {
   100% {
     text-shadow: 0 0 5px var(--primary-green);
   }
-}
-
-h1,
-h2 {
-  animation: pulse 2s infinite;
 }
