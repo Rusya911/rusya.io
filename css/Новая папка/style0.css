@@ -1,0 +1,387 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+a {
+  color: #00ffc3;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #00ff73;
+}
+
+table {
+  width: 100%;
+  background-color: #121212;
+  color: #e0e0e0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #00ff73;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #1b1b1b;
+}
+
+
+.button,
+.pill-button,
+.send-button {
+  background-color: #00ff73;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px #00ff73, 0 0 20px #00ff73;
+}
+
+.button:hover,
+.pill-button:hover,
+.send-button:hover {
+  box-shadow: 0 0 20px #00ff73, 0 0 40px #00ff73;
+  transform: scale(1.05);
+}
+
+
+.service-card {
+  background-color: #111;
+  border: 1px solid #00ff73;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 115, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 255, 115, 0.4);
+}
+
+
+
+h1,
+h2,
+h3 {
+  color: #00ff73;
+  font-weight: 600;
+  text-shadow: 0 0 6px #00ff73;
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+}
+
+header {
+  background: #1a1a1a;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.header-buttons a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  background: #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.header-buttons a:hover {
+  background: #45a045;
+}
+
+.hero {
+  padding: 3rem 1rem;
+  background: white;
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.about {
+  background: #ffffff;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.feature {
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 200px;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.services {
+  background: #fff;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.services h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.service-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.service-table th,
+.service-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-buttons {
+    margin-top: 1rem;
+  }
+
+  .service-table th,
+  .service-table td {
+    font-size: 0.95rem;
+  }
+}
+
+.steps {
+  background: #f8f8f8;
+  padding: 2rem 1rem;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.steps h2 {
+  margin-bottom: 1rem;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.step {
+  background: #eaeaea;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-buttons {
+    margin-top: 1rem;
+  }
+
+  .service-table th,
+  .service-table td {
+    font-size: 0.95rem;
+  }
+}
+
+.matrix-title {
+  position: absolute;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 2em;
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 2;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.matrix-image-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.matrix-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Общие стили для кнопок */
+.pill-button {
+  position: absolute;
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+}
+
+/* Цвета */
+.telegram-button {
+  background-color: #2aabee;
+}
+
+.whatsapp-button {
+  background-color: #25d366;
+}
+
+/* Позиционирование на руках — адаптируй под свою картинку */
+.telegram-button {
+  top: 74%;
+  /* регулируй */
+  left: 20%;
+  /* регулируй */
+}
+
+.whatsapp-button {
+  top: 74%;
+  /* регулируй */
+  right: 20%;
+  /* регулируй */
+}
+
+.pill-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+}
+
+.pill-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 15px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 1.1em;
+  color: #fff;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.pill.telegram {
+  background-color: #2aabee;
+}
+
+.pill.whatsapp {
+  background-color: #25d366;
+}
+
+.pill:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+}
+
+
+@media (max-width: 600px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-buttons {
+    margin-top: 1rem;
+  }
+
+  .service-table th,
+  .service-table td {
+    font-size: 0.95rem;
+  }
+}
+
+footer {
+  background: #1a1a1a;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.footer-info p {
+  margin: 0.5rem 0;
+}
+
+.footer-map {
+  margin-top: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
