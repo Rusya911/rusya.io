@@ -4,13 +4,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="Ремонт компьютеров и ноутбуков в Севастополе. Частный мастер с опытом более 10 лет. Выезд на дом.">
+  <meta name="theme-color" content="#111111">
   <title>Ремонт компьютеров — Частный мастер</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/script.js" defer></script>
 </head>
 
 <body>
@@ -20,16 +23,13 @@
       <span id="phone" class="phone-number"></span>
     </div>
     <div class="header-buttons">
-      <a href="https://t.me/Roo7ya"" target=" _blank" class="enhanced-button">
+      <a href="https://t.me/Roo7ya" target="_blank" class="enhanced-button">
         <i class="fab fa-telegram"></i> Telegram
       </a>
       <a href="https://wa.me/79780597099" target="_blank" class="enhanced-button">
         <i class="fab fa-whatsapp"></i> WhatsApp
       </a>
     </div>
-    <script>
-      document.getElementById('phone').innerHTML = '<i class="fas fa-phone"></i> +7' + '(978)' + '059-' + '70-99';
-    </script>
   </header>
 
   <section class="hero">
@@ -142,7 +142,7 @@
   <section class="matrix-contact">
     <div class="matrix-image-container">
       <h2 class="matrix-title">Связь со мной</h2>
-      <img src="images/matrica3.jpg" alt="Matrix Choice" class="matrix-image">
+      <img src="images/matrica.jpg" alt="Matrix Choice" class="matrix-image">
       <a href="https://t.me/Roo7ya" class="pill-button telegram-button">
         <i class="fab fa-telegram"></i> Telegram
       </a>
@@ -159,17 +159,6 @@
       <p>Севастополь и пригород</p>
     </div>
   </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const phoneEl = document.querySelector('.phone-hidden');
-      const phone = phoneEl.dataset.phone;
-      phoneEl.innerHTML = '<i class="fas fa-phone"></i> +' + phone.substring(0, 1) +
-        '(' + phone.substring(1, 4) + ')' +
-        phone.substring(4, 7) + '-' + phone.substring(7, 9) + '-' + phone.substring(9, 11);
-      phoneEl.style.direction = 'ltr';
-    });
-  </script>
 
 </body>
 
