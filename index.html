@@ -5,9 +5,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="Ремонт компьютеров и ноутбуков в Севастополе. Частный мастер с опытом более 10 лет. Выезд на дом.">
+  <meta name="description"
+    content="Ремонт компьютеров и ноутбуков в Севастополе. Частный мастер с опытом более 10 лет. Выезд на дом.">
   <meta name="theme-color" content="#111111">
   <title>Ремонт компьютеров — Частный мастер</title>
+  <link rel="icon" type="image/png" href="./images/favicon.png">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet">
@@ -16,7 +18,7 @@
   <script src="./js/script.js" defer></script>
 </head>
 
-<body>
+<body id="top">
   <header>
     <h1>Частный мастер — Ремонт компьютеров</h1>
     <div class="header-center">
@@ -32,12 +34,21 @@
     </div>
   </header>
 
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#steps">Как я работаю</a></li>
+      <li><a href="#contact">Связь</a></li>
+    </ul>
+  </nav>
+
   <section class="hero">
     <h2>Ремонт компьютеров и ноутбуков в Севастополе</h2>
     <p>Быстро. Честно. С гарантией. Работаю с выездом или у себя. Без посредников.</p>
   </section>
 
-  <section class="about">
+  <section id="about" class="about">
     <h2>Обо мне</h2>
     <p>Здравствуйте! Меня зовут Руслан. Я частный мастер по ремонту и апгрейду компьютерной техники. Работаю с 2013
       года. Говорю по делу, не навязываю лишнего и всегда объясняю, что сломалось.</p>
@@ -71,7 +82,7 @@
     </div>
   </section>
 
-  <section class="services">
+  <section id="services" class="services">
     <h2>Услуги и цены</h2>
     <div class="services-grid">
       <div class="service-card">
@@ -113,7 +124,7 @@
     </div>
   </section>
 
-  <section class="steps">
+  <section id="steps" class="steps">
     <h2>Как я работаю</h2>
     <div class="steps-list">
       <div class="step">
@@ -139,7 +150,7 @@
     </div>
   </section>
 
-  <section class="matrix-contact">
+  <section id="contact" class="matrix-contact">
     <div class="matrix-image-container">
       <h2 class="matrix-title">Связь со мной</h2>
       <img src="images/matrica.jpg" alt="Matrix Choice" class="matrix-image">
@@ -157,6 +168,11 @@
       <p>Частный мастер по ремонту компьютеров</p>
       <p>Работаю ежедневно с 9:00 до 21:00</p>
       <p>Севастополь и пригород</p>
+    </div>
+    <div class="footer-links">
+      <a href="#top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i> Наверх
+      </a>
     </div>
   </footer>
 
