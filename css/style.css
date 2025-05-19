@@ -13,7 +13,8 @@
 /* Добавляем плавный скролл для всего сайта */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Отступ для якорей с учетом фиксированного меню */
+  scroll-padding-top: 80px;
+  /* Отступ для якорей с учетом фиксированного меню */
 }
 
 /* Улучшенная типографика */
@@ -28,7 +29,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   overflow-x: hidden;
-  font-size: 16px; /* Base font size */
+  font-size: 16px;
+  /* Base font size */
   /* Улучшение скролла на мобильных устройствах */
   -webkit-overflow-scrolling: touch;
 }
@@ -105,7 +107,8 @@ body::before {
 }
 
 /* Добавляем общие стили для всех заголовков */
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   animation: pulse 2s infinite;
   margin-bottom: 1.5rem;
@@ -205,12 +208,29 @@ h1 {
 }
 
 /* Добавляем задержки для поочередного появления */
-.feature:nth-child(1) { animation-delay: 0.1s; }
-.feature:nth-child(2) { animation-delay: 0.2s; }
-.feature:nth-child(3) { animation-delay: 0.3s; }
-.feature:nth-child(4) { animation-delay: 0.4s; }
-.feature:nth-child(5) { animation-delay: 0.5s; }
-.feature:nth-child(6) { animation-delay: 0.6s; }
+.feature:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.feature:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.feature:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.feature:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.feature:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.feature:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 /* Услуги */
 .services {
@@ -289,12 +309,29 @@ h1 {
 }
 
 /* Добавляем задержки для поочередного появления */
-.service-card:nth-child(1) { animation-delay: 0.1s; }
-.service-card:nth-child(2) { animation-delay: 0.2s; }
-.service-card:nth-child(3) { animation-delay: 0.3s; }
-.service-card:nth-child(4) { animation-delay: 0.4s; }
-.service-card:nth-child(5) { animation-delay: 0.5s; }
-.service-card:nth-child(6) { animation-delay: 0.6s; }
+.service-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.service-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.service-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.service-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.service-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.service-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 /* Шаги работы */
 .steps {
@@ -408,11 +445,25 @@ h1 {
 }
 
 /* Добавляем задержки для поочередного появления */
-.step:nth-child(1) { animation-delay: 0.1s; }
-.step:nth-child(2) { animation-delay: 0.2s; }
-.step:nth-child(3) { animation-delay: 0.3s; }
-.step:nth-child(4) { animation-delay: 0.4s; }
-.step:nth-child(5) { animation-delay: 0.5s; }
+.step:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.step:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.step:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.step:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.step:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 /* Матрица контакт */
 .matrix-contact {
@@ -455,8 +506,13 @@ h1 {
 .matrix-image {
   width: 100%;
   height: auto;
-  display: block;
-  border-radius: 8px;
+  border-radius: 70px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.matrix-image:hover {
+  transform: scale(1.02);
 }
 
 .pill-button {
@@ -611,29 +667,30 @@ footer {
     bottom: 20px;
     font-size: 1rem;
   }
-  
+
   html {
-    scroll-padding-top: 60px; /* Уменьшаем отступ для якорей на мобильных */
+    scroll-padding-top: 60px;
+    /* Уменьшаем отступ для якорей на мобильных */
   }
 
   .main-nav {
     padding: 0.3rem 0.5rem;
   }
-  
+
   .main-nav ul {
     gap: 0.5rem;
   }
-  
+
   .main-nav a {
     padding: 0.4rem 0.5rem;
     font-size: 0.9rem;
   }
-  
+
   /* Уменьшаем базовый размер текста для мобильных устройств */
   body {
     font-size: 14px;
   }
-  
+
   /* Улучшаем отображение карточек на мобильных устройствах */
   .features {
     grid-template-columns: 1fr;
@@ -653,26 +710,26 @@ footer {
     text-align: center;
     padding: 1rem 0.5rem;
   }
-  
+
   header h1 {
     flex: none;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .header-center,
   .header-buttons {
     flex: none;
     width: 100%;
     justify-content: center;
   }
-  
+
   .header-buttons {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
+
   .enhanced-button {
     padding: 8px 15px;
     font-size: 0.9rem;
@@ -683,40 +740,40 @@ footer {
   .hero {
     padding: 2rem 0.8rem;
   }
-  
+
   .hero h2 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .hero p {
     font-size: 1rem;
     padding: 0 0.5rem;
   }
-  
+
   /* Адаптация секции "Обо мне" */
   .about {
     padding: 1.5rem 0.8rem;
   }
-  
+
   .about p {
     font-size: 0.95rem;
     padding: 0 0.5rem;
   }
-  
+
   /* Адаптация карточек услуг */
   .service-card {
     padding: 1.2rem 0.8rem;
   }
-  
+
   .service-title {
     font-size: 1.1rem;
   }
-  
+
   .service-price {
     font-size: 1.1rem;
   }
-  
+
   .service-desc {
     font-size: 0.9rem;
   }
@@ -733,7 +790,7 @@ footer {
     position: relative;
     width: 100%;
   }
-  
+
   .matrix-image {
     max-width: 100%;
     height: auto;
@@ -763,12 +820,12 @@ footer {
   .steps h2::after {
     width: 40px;
   }
-  
+
   /* Адаптация футера */
   footer {
     padding: 1.2rem 0.8rem;
   }
-  
+
   .footer-info p {
     font-size: 0.9rem;
     margin: 0.5rem 0;
@@ -783,61 +840,61 @@ footer {
     bottom: 15px;
     font-size: 0.9rem;
   }
-  
+
   html {
     scroll-padding-top: 50px;
   }
-  
+
   .main-nav ul {
     gap: 0.2rem;
   }
-  
+
   .main-nav a {
     padding: 0.3rem 0.4rem;
     font-size: 0.8rem;
   }
-  
+
   .scroll-to-top {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   body {
     font-size: 13px;
   }
-  
+
   header {
     padding: 0.8rem 0.5rem;
   }
-  
+
   header h1 {
     font-size: 1.1rem;
   }
-  
+
   /* Уменьшаем отступы */
   section {
     padding: 1.2rem 0.6rem !important;
   }
-  
+
   .feature {
     padding: 1.2rem 0.8rem;
   }
-  
+
   .service-card {
     padding: 1rem 0.6rem;
   }
-  
+
   /* Кнопки контактов */
   .pill-button {
     padding: 8px 16px;
     font-size: 0.8em;
     margin-bottom: 1rem;
   }
-  
+
   .telegram-button {
     left: 10%;
   }
-  
+
   .whatsapp-button {
     right: 10%;
   }
@@ -873,24 +930,26 @@ footer {
     top: 3%;
     border-width: 1px;
   }
-  
+
   /* Заголовки */
   h2 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
-  
+
   /* Описание услуг */
-  .service-title, .service-price {
+  .service-title,
+  .service-price {
     font-size: 1rem;
   }
-  
+
   .service-desc {
     font-size: 0.85rem;
   }
-  
+
   /* Иконки */
-  .feature-icon, .service-icon {
+  .feature-icon,
+  .service-icon {
     font-size: 1.6rem;
   }
 }
@@ -899,42 +958,43 @@ footer {
   html {
     scroll-padding-top: 50px;
   }
-  
+
   .main-nav a {
     font-size: 0.75rem;
     padding: 0.3rem;
   }
-  
+
   body {
     font-size: 12px;
   }
-  
+
   .matrix-title {
     font-size: 0.8rem;
     padding: 6px 12px;
     max-width: 70%;
     top: 4%;
   }
-  
+
   .pill-button {
     padding: 6px 12px;
     font-size: 0.75em;
   }
-  
+
   .enhanced-button {
     padding: 6px 12px;
     font-size: 0.8rem;
   }
-  
+
   .feature-text {
     font-size: 0.95rem;
   }
-  
+
   .feature-desc {
     font-size: 0.8rem;
   }
-  
-  .service-icon, .feature-icon {
+
+  .service-icon,
+  .feature-icon {
     font-size: 1.4rem;
   }
 }
@@ -1144,9 +1204,10 @@ header h1 {
     bottom: 20px;
     font-size: 1rem;
   }
-  
+
   html {
-    scroll-padding-top: 60px; /* Уменьшаем отступ для якорей на мобильных */
+    scroll-padding-top: 60px;
+    /* Уменьшаем отступ для якорей на мобильных */
   }
 
   .main-nav {
@@ -1162,12 +1223,441 @@ header h1 {
     bottom: 15px;
     font-size: 0.9rem;
   }
-  
+
   html {
     scroll-padding-top: 50px;
   }
-  
+
   .main-nav ul {
     gap: 0.2rem;
   }
+}
+
+/* Стили для страницы FAQ */
+.faq-page {
+  background: transparent;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq-page h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--accent-cyan);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.faq-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.faq-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-green), var(--accent-cyan));
+}
+
+.faq-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+  border-color: var(--primary-green);
+}
+
+.faq-icon {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+.faq-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.faq-card p {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.faq-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.faq-content h4 {
+  color: var(--primary-green);
+  margin: 1.5rem 0 1rem;
+  font-size: 1.1rem;
+}
+
+.faq-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.faq-content ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-gray);
+}
+
+.faq-content ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+}
+
+.faq-content p {
+  color: var(--text-gray);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Адаптивность для страницы FAQ */
+@media (max-width: 768px) {
+  .faq-page {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .faq-card {
+    padding: 1.5rem;
+  }
+
+  .faq-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .faq-card p {
+    font-size: 0.9rem;
+  }
+
+  .faq-content h4 {
+    font-size: 1rem;
+  }
+
+  .faq-content ul li {
+    font-size: 0.9rem;
+  }
+
+  .faq-content p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-page {
+    padding: 1.2rem 0.6rem;
+  }
+
+  .faq-card {
+    padding: 1.2rem;
+  }
+
+  .faq-icon {
+    font-size: 2rem;
+  }
+
+  .faq-card h3 {
+    font-size: 1rem;
+  }
+
+  .faq-card p {
+    font-size: 0.85rem;
+  }
+
+  .faq-content h4 {
+    font-size: 0.95rem;
+  }
+
+  .faq-content ul li {
+    font-size: 0.85rem;
+  }
+
+  .faq-content p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Стили для страницы отзывов */
+.reviews-page {
+  background: transparent;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.reviews-page h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--accent-cyan);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.review-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-author {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.review-date {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.review-rating {
+  color: #f59e0b;
+  margin-bottom: 0.75rem;
+}
+
+.review-text {
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+/* Стили для формы отзывов */
+.review-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Стили для рейтинга */
+.rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+}
+
+.rating-input input[type="radio"] {
+  display: none;
+}
+
+.rating-input label {
+  cursor: pointer;
+  color: #e5e7eb;
+  font-size: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.rating-input label:hover,
+.rating-input label:hover ~ label,
+.rating-input input[type="radio"]:checked ~ label {
+  color: #f59e0b;
+}
+
+/* Стили для капчи */
+.captcha-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#captchaQuestion {
+  font-weight: 600;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+/* Стили для кнопки отправки */
+.submit-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #2563eb;
+}
+
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Адаптивность для страницы отзывов */
+@media (max-width: 768px) {
+  .reviews-page {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .review-card {
+    padding: 1.5rem;
+  }
+
+  .review-form-container {
+    padding: 1.5rem;
+  }
+
+  .rating-input label {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-page {
+    padding: 1.2rem 0.6rem;
+  }
+
+  .review-card {
+    padding: 1.2rem;
+  }
+
+  .review-author {
+    font-size: 1rem;
+  }
+
+  .review-date {
+    font-size: 0.8rem;
+  }
+
+  .review-text {
+    font-size: 0.9rem;
+  }
+
+  .review-form-container {
+    padding: 1.2rem;
+  }
+
+  .rating-input label {
+    font-size: 1.2rem;
+  }
+
+  .submit-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Сообщения об ошибках и успехе */
+.error-message,
+.success-message {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.success-message {
+  background-color: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
 }

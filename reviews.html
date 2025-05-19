@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <!-- SEO -->
+  <title>Отзывы о ремонте компьютеров в Севастополе — my-pc-master.online</title>
+  <meta name="description" content="Реальные отзывы клиентов о ремонте компьютеров и ноутбуков в Севастополе. Оставьте свой отзыв о работе мастера.">
+  <meta name="keywords" content="отзывы ремонт компьютеров Севастополь, отзывы компьютерный мастер, отзывы ремонт ноутбуков">
+  <meta name="yandex-verification" content="127c801a45f66355" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Отзывы о ремонте компьютеров в Севастополе — my-pc-master.online">
+  <meta property="og:description" content="Реальные отзывы клиентов о ремонте компьютеров и ноутбуков в Севастополе. Оставьте свой отзыв о работе мастера.">
+  <meta property="og:image" content="https://my-pc-master.online/images/og-preview.jpg">
+  <meta property="og:url" content="https://my-pc-master.online/reviews.html">
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+
+  <!-- Шрифты и иконки -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Цвет темы браузера -->
+  <meta name="theme-color" content="#111111">
+</head>
+
+<body id="top">
+  <header>
+    <h1>Частный мастер — Ремонт компьютеров</h1>
+    <div class="header-center">
+      <span id="phone" class="phone-number"></span>
+    </div>
+    <div class="header-buttons">
+      <a href="https://t.me/Roo7ya" target="_blank" class="enhanced-button">
+        <i class="fab fa-telegram"></i> Telegram
+      </a>
+      <a href="https://wa.me/79780597099" target="_blank" class="enhanced-button">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html#about">Обо мне</a></li>
+      <li><a href="index.html#services">Услуги</a></li>
+      <li><a href="index.html#steps">Как я работаю</a></li>
+      <li><a href="index.html#contact">Связь</a></li>
+      <li><a href="faq.html">Советы</a></li>
+      <li><a href="reviews.html" class="active">Отзывы</a></li>
+    </ul>
+  </nav>
+
+  <section class="reviews-page">
+    <h2>Отзывы клиентов</h2>
+    
+    <div class="reviews-grid">
+      <!-- Примеры отзывов -->
+      <article class="review-card">
+        <div class="review-header">
+          <div class="review-author">Руслан</div>
+          <div class="review-date">15.03.2025</div>
+        </div>
+        <div class="review-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="review-text">Тестовый отзыв и всякое бла-бла-бла</p>
+      </article>
+    </div>
+
+    <div class="review-form-container">
+      <h3>Оставить отзыв</h3>
+      <form id="reviewForm" class="review-form">
+        <div class="form-group">
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" name="name" required minlength="2" placeholder="Введите ваше имя">
+        </div>
+        
+        <div class="form-group">
+          <label>Оценка</label>
+          <div class="rating-input">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5"><i class="fas fa-star"></i></label>
+            
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"><i class="fas fa-star"></i></label>
+            
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"><i class="fas fa-star"></i></label>
+            
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"><i class="fas fa-star"></i></label>
+            
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"><i class="fas fa-star"></i></label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="review">Ваш отзыв</label>
+          <textarea id="review" name="review" required minlength="10" placeholder="Напишите ваш отзыв (минимум 10 символов)"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="captcha">Подтвердите, что вы не робот</label>
+          <div class="captcha-container">
+            <span id="captchaQuestion"></span>
+            <input type="number" id="captcha" name="captcha" required placeholder="Введите ответ">
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-button">Отправить отзыв</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-info">
+      <p>Частный мастер по ремонту компьютеров</p>
+      <p>Работаю ежедневно с 9:00 до 21:00</p>
+      <p>Севастополь и пригород</p>
+      <a href="https://vk.com/ru7lan_r" target="_blank" class="footer-link">
+        <i class="fab fa-vk"></i> ВКонтакте
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="#top" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i> Наверх
+      </a>
+    </div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+  <script src="./js/reviews.js"></script>
+</body>
+
+</html> 
