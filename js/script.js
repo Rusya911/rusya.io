@@ -26,28 +26,39 @@ document.addEventListener('DOMContentLoaded', function() {
       floatingBtn.setAttribute('aria-label', 'Прокрутить наверх');
       body.appendChild(floatingBtn);
       
-      // Скрываем кнопку "Наверх" вначале
-      floatingBtn.style.opacity = '0';
-      floatingBtn.style.visibility = 'hidden';
-      
-      // Показываем кнопку "Наверх" при прокрутке вниз
+      // Оптимизация производительности скролла
       let scrollTimeout;
+      let lastScrollTop = 0;
+      let ticking = false;
+      
       window.addEventListener('scroll', function() {
-        if (scrollTimeout) {
-          window.cancelAnimationFrame(scrollTimeout);
-        }
-        
-        scrollTimeout = window.requestAnimationFrame(function() {
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Показываем/скрываем кнопку "Наверх"
+            if (scrollTop > 300) {
+              floatingBtn.style.opacity = '1';
+              floatingBtn.style.visibility = 'visible';
+            } else {
+              floatingBtn.style.opacity = '0';
+              floatingBtn.style.visibility = 'hidden';
+            }
+            
+            // Предотвращаем скролл на iOS при открытой клавиатуре
+            if (scrollTop === lastScrollTop) {
+              document.body.style.overflow = 'hidden';
+              setTimeout(() => {
+                document.body.style.overflow = '';
+              }, 100);
+            }
+            
+            lastScrollTop = scrollTop;
+            ticking = false;
+          });
           
-          if (scrollTop > 300) {
-            floatingBtn.style.opacity = '1';
-            floatingBtn.style.visibility = 'visible';
-          } else {
-            floatingBtn.style.opacity = '0';
-            floatingBtn.style.visibility = 'hidden';
-          }
-        });
+          ticking = true;
+        }
       }, { passive: true });
     }
     
@@ -61,9 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          // Добавляем отступ для фиксированного меню
+          const headerOffset = 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
           });
           
           // Обновляем URL без перезагрузки страницы
@@ -72,25 +88,21 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Оптимизация скролла для мобильных устройств
+    // Оптимизация для мобильных устройств
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
       document.body.classList.add('mobile-device');
       
-      let lastScrollTop = 0;
-      let ticking = false;
-      
-      window.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            lastScrollTop = currentScrollTop;
-            ticking = false;
-          });
-          
-          ticking = true;
+      // Предотвращаем двойной тап для зума
+      document.addEventListener('touchend', function(e) {
+        if (e.target.tagName === 'A') {
+          e.preventDefault();
+          e.target.click();
         }
-      }, { passive: true });
+      }, { passive: false });
+      
+      // Улучшаем отзывчивость тач-событий
+      document.addEventListener('touchstart', function() {}, { passive: true });
     }
   } catch (error) {
     console.error('Error in script.js:', error);

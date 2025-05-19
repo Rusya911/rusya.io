@@ -660,6 +660,71 @@ footer {
 
 /* Адаптивность */
 @media (max-width: 768px) {
+  /* Улучшаем отображение шапки */
+  header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .header-buttons {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .enhanced-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Улучшаем навигацию */
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .main-nav a {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Улучшаем отображение карточек */
+  .features, .services-grid, .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Улучшаем отображение шагов */
+  .step {
+    padding: 1rem;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  /* Улучшаем отображение матрицы-контакты */
+  .matrix-image-container {
+    padding: 0 1rem;
+  }
+
+  .pill-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .telegram-button {
+    left: 10%;
+  }
+
+  .whatsapp-button {
+    right: 10%;
+  }
+
   .floating-top-btn {
     width: 40px;
     height: 40px;
@@ -689,51 +754,6 @@ footer {
   /* Уменьшаем базовый размер текста для мобильных устройств */
   body {
     font-size: 14px;
-  }
-
-  /* Улучшаем отображение карточек на мобильных устройствах */
-  .features {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  /* Адаптация шапки */
-  header {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    text-align: center;
-    padding: 1rem 0.5rem;
-  }
-
-  header h1 {
-    flex: none;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .header-center,
-  .header-buttons {
-    flex: none;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .header-buttons {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .enhanced-button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    margin: 0 0.2rem;
   }
 
   /* Адаптация секции hero */
@@ -796,11 +816,6 @@ footer {
     height: auto;
   }
 
-  .pill-button {
-    padding: 10px 20px;
-    font-size: 0.9em;
-  }
-
   /* Адаптация шагов */
   .step {
     padding: 1.2rem 0.8rem;
@@ -833,6 +848,63 @@ footer {
 }
 
 @media (max-width: 480px) {
+  /* Дополнительные улучшения для маленьких экранов */
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .phone-number {
+    font-size: 1rem;
+  }
+
+  .enhanced-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .main-nav a {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  /* Улучшаем отображение форм */
+  .review-form-container {
+    padding: 1rem;
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .rating-input label {
+    font-size: 1.2rem;
+  }
+
+  /* Улучшаем отображение кнопок */
+  .submit-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  /* Улучшаем отображение карточек отзывов */
+  .review-card {
+    padding: 1rem;
+  }
+
+  .review-author {
+    font-size: 0.9rem;
+  }
+
+  .review-date {
+    font-size: 0.8rem;
+  }
+
+  .review-text {
+    font-size: 0.9rem;
+  }
+
   .floating-top-btn {
     width: 35px;
     height: 35px;
@@ -847,11 +919,6 @@ footer {
 
   .main-nav ul {
     gap: 0.2rem;
-  }
-
-  .main-nav a {
-    padding: 0.3rem 0.4rem;
-    font-size: 0.8rem;
   }
 
   .scroll-to-top {
@@ -1660,4 +1727,42 @@ header h1 {
   background-color: #dcfce7;
   color: #16a34a;
   border: 1px solid #bbf7d0;
+}
+
+/* Добавляем поддержку тёмной темы */
+@media (prefers-color-scheme: dark) {
+  .review-form-container,
+  .review-card {
+    background: var(--card-bg);
+    color: #e0e0e0;
+  }
+
+  .form-group label {
+    color: #e0e0e0;
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-color);
+    color: #e0e0e0;
+  }
+
+  .form-group input[type="text"]:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+  }
+
+  .review-author {
+    color: #e0e0e0;
+  }
+
+  .review-date {
+    color: var(--text-gray);
+  }
+
+  .review-text {
+    color: var(--text-gray);
+  }
 }

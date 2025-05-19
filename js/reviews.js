@@ -189,6 +189,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Обработка отправки формы
     if (reviewForm) {
+      // Предотвращаем отправку формы при нажатии Enter
+      reviewForm.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+        }
+      });
+      
       reviewForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -207,6 +214,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (reviewsGrid) {
               reviewsGrid.insertBefore(reviewCard, reviewsGrid.firstChild);
+              
+              // Плавная анимация появления нового отзыва
+              reviewCard.style.opacity = '0';
+              reviewCard.style.transform = 'translateY(-20px)';
+              
+              setTimeout(() => {
+                reviewCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                reviewCard.style.opacity = '1';
+                reviewCard.style.transform = 'translateY(0)';
+              }, 50);
             }
             
             // Очищаем форму и генерируем новую капчу
@@ -215,6 +232,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Показываем сообщение об успехе
             showMessage('Отзыв успешно добавлен!', 'success');
+            
+            // Прокручиваем к новому отзыву
+            if (reviewCard) {
+              reviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
           }
         } catch (error) {
           showMessage(error.message, 'error');
@@ -232,9 +254,24 @@ document.addEventListener('DOMContentLoaded', function() {
       if (formContainer) {
         formContainer.insertBefore(messageDiv, formContainer.firstChild);
         
-        // Удаляем сообщение через 5 секунд
+        // Анимация появления сообщения
+        messageDiv.style.opacity = '0';
+        messageDiv.style.transform = 'translateY(-10px)';
+        
         setTimeout(() => {
-          messageDiv.remove();
+          messageDiv.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          messageDiv.style.opacity = '1';
+          messageDiv.style.transform = 'translateY(0)';
+        }, 50);
+        
+        // Удаляем сообщение через 5 секунд с анимацией
+        setTimeout(() => {
+          messageDiv.style.opacity = '0';
+          messageDiv.style.transform = 'translateY(-10px)';
+          
+          setTimeout(() => {
+            messageDiv.remove();
+          }, 300);
         }, 5000);
       }
     }
@@ -265,6 +302,15 @@ document.addEventListener('DOMContentLoaded', function() {
       
       return article;
     }
+    
+    // Добавляем обработку тач-событий для рейтинга
+    const ratingInputs = document.querySelectorAll('.rating-input input[type="radio"]');
+    ratingInputs.forEach(input => {
+      input.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        this.checked = true;
+      }, { passive: false });
+    });
     
   } catch (error) {
     console.error('Error in reviews.js:', error);
