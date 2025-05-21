@@ -1766,3 +1766,108 @@ header h1 {
     color: var(--text-gray);
   }
 }
+
+/* Стили для авторизации через Telegram */
+.auth-container {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.telegram-auth-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #2aabee, #229ed9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.telegram-auth-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(42, 171, 238, 0.4);
+}
+
+/* Стили для кнопок управления отзывами */
+.review-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+.edit-review-btn,
+.delete-review-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.edit-review-btn {
+    color: var(--primary-green);
+}
+
+.delete-review-btn {
+    color: #ff4444;
+}
+
+.edit-review-btn:hover,
+.delete-review-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+/* Адаптивность для новых элементов */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .telegram-auth-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .review-actions {
+        margin-top: 0.8rem;
+    }
+    
+    .edit-review-btn,
+    .delete-review-btn {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+    
+    .telegram-auth-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
+    
+    .review-actions {
+        margin-top: 0.6rem;
+    }
+    
+    .edit-review-btn,
+    .delete-review-btn {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+}
