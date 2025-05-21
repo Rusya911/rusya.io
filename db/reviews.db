@@ -1,0 +1,13 @@
+-- Создание таблицы отзывов
+CREATE TABLE IF NOT EXISTS reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    review_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address TEXT,
+    user_agent TEXT
+);
+
+-- Создание индекса для сортировки по дате
+CREATE INDEX IF NOT EXISTS idx_reviews_created_at ON reviews(created_at); 

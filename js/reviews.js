@@ -149,6 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
   try {
     const reviewForm = document.getElementById('reviewForm');
     const captchaQuestion = document.getElementById('captchaQuestion');
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    
+    // Загрузка отзывов при загрузке страницы
+    loadReviews();
     
     // Генерация простой капчи
     function generateCaptcha() {
@@ -160,6 +164,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     let currentCaptchaAnswer = generateCaptcha();
+    
+    // Загрузка отзывов с сервера
+    async function loadReviews() {
+      try {
+        const response = await fetch('/api/reviews.php');
+        const data = await response.json();
+        
+        if (data.success && data.reviews) {
+          // Очищаем существующие отзывы
+          reviewsGrid.innerHTML = '';
+          
+          // Добавляем отзывы на страницу
+          data.reviews.forEach(review => {
+            const reviewCard = createReviewCard(
+              review.name,
+              review.rating,
+              review.review_text,
+              review.created_at
+            );
+            reviewsGrid.appendChild(reviewCard);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading reviews:', error);
+        showMessage('Ошибка при загрузке отзывов', 'error');
+      }
+    }
     
     // Валидация формы
     function validateForm(formData) {
@@ -196,46 +227,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      reviewForm.addEventListener('submit', function(e) {
+      reviewForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         try {
           const formData = new FormData(this);
           
           if (validateForm(formData)) {
-            // Здесь должна быть отправка данных на сервер
-            // Пока просто добавляем отзыв на страницу
-            const name = formData.get('name');
-            const rating = parseInt(formData.get('rating'));
-            const review = formData.get('review');
+            // Отправляем данные на сервер
+            const response = await fetch('/api/reviews.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: formData.get('name'),
+                rating: parseInt(formData.get('rating')),
+                review_text: formData.get('review')
+              })
+            });
             
-            const reviewCard = createReviewCard(name, rating, review);
-            const reviewsGrid = document.querySelector('.reviews-grid');
+            const data = await response.json();
             
-            if (reviewsGrid) {
-              reviewsGrid.insertBefore(reviewCard, reviewsGrid.firstChild);
+            if (data.success) {
+              // Очищаем форму и генерируем новую капчу
+              this.reset();
+              currentCaptchaAnswer = generateCaptcha();
               
-              // Плавная анимация появления нового отзыва
-              reviewCard.style.opacity = '0';
-              reviewCard.style.transform = 'translateY(-20px)';
+              // Показываем сообщение об успехе
+              showMessage('Отзыв успешно добавлен!', 'success');
               
-              setTimeout(() => {
-                reviewCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                reviewCard.style.opacity = '1';
-                reviewCard.style.transform = 'translateY(0)';
-              }, 50);
-            }
-            
-            // Очищаем форму и генерируем новую капчу
-            this.reset();
-            currentCaptchaAnswer = generateCaptcha();
-            
-            // Показываем сообщение об успехе
-            showMessage('Отзыв успешно добавлен!', 'success');
-            
-            // Прокручиваем к новому отзыву
-            if (reviewCard) {
-              reviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Перезагружаем отзывы
+              await loadReviews();
+            } else {
+              throw new Error(data.error || 'Ошибка при добавлении отзыва');
             }
           }
         } catch (error) {
@@ -277,11 +302,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Создание карточки отзыва
-    function createReviewCard(name, rating, text) {
+    function createReviewCard(name, rating, text, date) {
       const article = document.createElement('article');
       article.className = 'review-card';
       
-      const date = new Date().toLocaleDateString('ru-RU', {
+      // Форматируем дату
+      const formattedDate = new Date(date).toLocaleDateString('ru-RU', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
@@ -294,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
       article.innerHTML = `
         <div class="review-header">
           <div class="review-author">${name}</div>
-          <div class="review-date">${date}</div>
+          <div class="review-date">${formattedDate}</div>
         </div>
         <div class="review-rating">${stars}</div>
         <p class="review-text">${text}</p>
