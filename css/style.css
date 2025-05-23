@@ -665,7 +665,8 @@ footer {
 
   .header-buttons {
     width: 100%;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
     gap: 0.5rem;
   }
 
@@ -677,7 +678,8 @@ footer {
   /* Улучшаем навигацию */
   .main-nav ul {
     flex-wrap: wrap;
-    justify-content: center;
+    display: flex !important;
+    justify-content: center !important;
     gap: 0.5rem;
   }
 
@@ -703,12 +705,7 @@ footer {
     font-size: 1.2rem;
   }
 
-  /* Улучшаем отображение матрицы-контакты */
-  .matrix-image-container {
-    padding: 0 1rem;
-  }
-
-  .pill-button {
+   .pill-button {
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
   }
@@ -856,6 +853,18 @@ footer {
   .enhanced-button {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
+  }
+
+  .header-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  .main-nav ul {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 0.2rem;
   }
 
   .main-nav a {
