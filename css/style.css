@@ -511,10 +511,6 @@ h1 {
   transition: transform 0.3s ease;
 }
 
-.matrix-image:hover {
-  transform: scale(1.02);
-}
-
 .pill-button {
   position: absolute;
   padding: 16px 32px;
