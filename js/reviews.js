@@ -1,7 +1,7 @@
 // 🔧 ЗАМЕНИ на свои данные Supabase
 const SUPABASE_URL = 'https://jfjaescqnacycsrfrbwj.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmamFlc2NxbmFjeWNzcmZyYndqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MDkzNjQsImV4cCI6MjA2NDA4NTM2NH0.AhTOw9yjZxACvxMr3XdW2sC-Ek5AbijSkrLy-NKEOwE';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Тестовая функция для проверки подключения
 async function testConnection() {
@@ -27,10 +27,23 @@ async function testConnection() {
 // 🧠 Простая капча: сумма двух случайных чисел
 let captchaAnswer = 0;
 function generateCaptcha() {
-  const a = Math.floor(Math.random() * 10) + 1;
-  const b = Math.floor(Math.random() * 10) + 1;
-  captchaAnswer = a + b;
-  document.getElementById('captchaQuestion').textContent = `Сколько будет ${a} + ${b}?`;
+  try {
+    const captchaQuestion = document.getElementById('captchaQuestion');
+    if (!captchaQuestion) {
+      console.error('Элемент captchaQuestion не найден');
+      return;
+    }
+
+    const a = Math.floor(Math.random() * 10) + 1;
+    const b = Math.floor(Math.random() * 10) + 1;
+    captchaAnswer = a + b;
+    
+    // Обновляем текст капчи
+    captchaQuestion.textContent = `Сколько будет ${a} + ${b}?`;
+    console.log('Капча сгенерирована:', captchaAnswer);
+  } catch (err) {
+    console.error('Ошибка при генерации капчи:', err);
+  }
 }
 
 // 📦 Отправка отзыва
@@ -59,7 +72,8 @@ document.getElementById('reviewForm').addEventListener('submit', async (e) => {
       .insert([{ 
         name, 
         rating: parseInt(rating, 10), 
-        review 
+        review,
+        created_at: new Date().toISOString()
       }])
       .select();
 
@@ -87,36 +101,69 @@ async function loadReviews() {
       .select('*')
       .order('created_at', { ascending: false });
 
-    const container = document.createElement('div');
-    container.id = 'review-list';
-    container.innerHTML = '';
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    if (!reviewsGrid) {
+      console.error('Элемент .reviews-grid не найден');
+      return;
+    }
+
+    // Очищаем сетку отзывов
+    reviewsGrid.innerHTML = '';
 
     if (error) {
       console.error('Ошибка загрузки:', error);
-      container.textContent = 'Не удалось загрузить отзывы: ' + error.message;
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = 'Не удалось загрузить отзывы: ' + error.message;
+      reviewsGrid.appendChild(errorDiv);
       return;
     }
 
     if (!data || data.length === 0) {
-      container.textContent = 'Пока нет отзывов.';
+      const noReviewsDiv = document.createElement('div');
+      noReviewsDiv.className = 'no-reviews';
+      noReviewsDiv.textContent = 'Пока нет отзывов.';
+      reviewsGrid.appendChild(noReviewsDiv);
     } else {
       data.forEach(({ name, rating, review, created_at }) => {
-        const div = document.createElement('div');
-        div.classList.add('single-review');
-        div.innerHTML = `
-          <strong>${name}</strong> (${new Date(created_at).toLocaleDateString()}):
-          <div>Оценка: ${'⭐'.repeat(rating)}</div>
-          <div>${review}</div>
-          <hr>`;
-        container.appendChild(div);
-      });
-    }
+        const article = document.createElement('article');
+        article.className = 'review-card';
+        
+        // Форматируем дату
+        const date = new Date(created_at).toLocaleDateString('ru-RU', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
 
-    // Вставляем после формы, если ещё не вставлен
-    if (!document.getElementById('review-list')) {
-      document.querySelector('.review-form-container').appendChild(container);
-    } else {
-      document.getElementById('review-list').replaceWith(container);
+        // Создаем звезды рейтинга
+        const stars = Array(5).fill().map((_, i) => 
+          `<i class="fas fa-star${i < rating ? '' : '-half-alt'}"></i>`
+        ).join('');
+
+        article.innerHTML = `
+          <div class="review-header">
+            <div class="review-author">${name}</div>
+            <div class="review-date">${date}</div>
+          </div>
+          <div class="review-rating">
+            ${stars}
+          </div>
+          <p class="review-text">${review}</p>
+        `;
+
+        // Добавляем анимацию появления
+        article.style.opacity = '0';
+        article.style.transform = 'translateY(20px)';
+        reviewsGrid.appendChild(article);
+
+        // Запускаем анимацию
+        requestAnimationFrame(() => {
+          article.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          article.style.opacity = '1';
+          article.style.transform = 'translateY(0)';
+        });
+      });
     }
   } catch (err) {
     console.error('Ошибка при загрузке отзывов:', err);
@@ -125,6 +172,8 @@ async function loadReviews() {
 
 // 🟢 Старт
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('DOM загружен, инициализация...');
+  
   // Проверяем подключение при загрузке
   const isConnected = await testConnection();
   if (!isConnected) {
@@ -132,7 +181,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   
+  // Генерируем первую капчу
   generateCaptcha();
+  
+  // Загружаем отзывы
   loadReviews();
 });
 

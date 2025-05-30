@@ -1623,14 +1623,35 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 1rem;
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 1rem;
 }
 
 #captchaQuestion {
   font-weight: 600;
-  color: #1f2937;
+  color: var(--accent-cyan);
   padding: 0.5rem 1rem;
-  background: #f3f4f6;
+  background: rgba(0, 255, 255, 0.1);
   border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+#captcha {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  width: 100px;
+}
+
+#captcha:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
 }
 
 /* Стили для кнопки отправки */
