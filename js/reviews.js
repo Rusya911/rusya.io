@@ -1,33 +1,140 @@
-// Генерация случайного числа для капчи
-function generateCaptcha() {
-    const num1 = Math.floor(Math.random() * 9) + 1; // От 1 до 9
-    const num2 = Math.floor(Math.random() * 9) + 1; // От 1 до 9
-    const operators = ['+', '-', '*'];
-    const operator = operators[Math.floor(Math.random() * operators.length)];
+// 🔧 ЗАМЕНИ на свои данные Supabase
+const SUPABASE_URL = 'https://jfjaescqnacycsrfrbwj.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmamFlc2NxbmFjeWNzcmZyYndqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MDkzNjQsImV4cCI6MjA2NDA4NTM2NH0.AhTOw9yjZxACvxMr3XdW2sC-Ek5AbijSkrLy-NKEOwE';
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Тестовая функция для проверки подключения
+async function testConnection() {
+  try {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .limit(1);
     
-    let answer;
-    switch(operator) {
-        case '+':
-            answer = num1 + num2;
-            break;
-        case '-':
-            // Убеждаемся, что из большего вычитаем меньшее
-            if (num1 >= num2) {
-                answer = num1 - num2;
-            } else {
-                answer = num2 - num1;
-                document.getElementById('captchaQuestion').textContent = `${num2} ${operator} ${num1} = ?`;
-                return answer;
-            }
-            break;
-        case '*':
-            answer = num1 * num2;
-            break;
+    if (error) {
+      console.error('Ошибка подключения:', error);
+      return false;
     }
     
-    document.getElementById('captchaQuestion').textContent = `${num1} ${operator} ${num2} = ?`;
-    return answer;
+    console.log('Подключение успешно:', data);
+    return true;
+  } catch (err) {
+    console.error('Ошибка при тестировании:', err);
+    return false;
+  }
 }
+
+// 🧠 Простая капча: сумма двух случайных чисел
+let captchaAnswer = 0;
+function generateCaptcha() {
+  const a = Math.floor(Math.random() * 10) + 1;
+  const b = Math.floor(Math.random() * 10) + 1;
+  captchaAnswer = a + b;
+  document.getElementById('captchaQuestion').textContent = `Сколько будет ${a} + ${b}?`;
+}
+
+// 📦 Отправка отзыва
+document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const rating = document.querySelector('input[name="rating"]:checked')?.value;
+  const review = document.getElementById('review').value.trim();
+  const captcha = parseInt(document.getElementById('captcha').value, 10);
+
+  if (captcha !== captchaAnswer) {
+    alert('Неверный ответ на капчу. Попробуйте снова.');
+    generateCaptcha();
+    return;
+  }
+
+  if (!name || !rating || !review) {
+    alert('Пожалуйста, заполните все поля.');
+    return;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('reviews')
+      .insert([{ 
+        name, 
+        rating: parseInt(rating, 10), 
+        review 
+      }])
+      .select();
+
+    if (error) {
+      console.error('Ошибка при отправке:', error);
+      alert('Ошибка при отправке отзыва: ' + error.message);
+    } else {
+      console.log('Отзыв успешно добавлен:', data);
+      alert('Спасибо за отзыв!');
+      document.getElementById('reviewForm').reset();
+      generateCaptcha();
+      loadReviews();
+    }
+  } catch (err) {
+    console.error('Ошибка при отправке:', err);
+    alert('Произошла ошибка при отправке отзыва');
+  }
+});
+
+// 📋 Загрузка отзывов и отображение
+async function loadReviews() {
+  try {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    const container = document.createElement('div');
+    container.id = 'review-list';
+    container.innerHTML = '';
+
+    if (error) {
+      console.error('Ошибка загрузки:', error);
+      container.textContent = 'Не удалось загрузить отзывы: ' + error.message;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      container.textContent = 'Пока нет отзывов.';
+    } else {
+      data.forEach(({ name, rating, review, created_at }) => {
+        const div = document.createElement('div');
+        div.classList.add('single-review');
+        div.innerHTML = `
+          <strong>${name}</strong> (${new Date(created_at).toLocaleDateString()}):
+          <div>Оценка: ${'⭐'.repeat(rating)}</div>
+          <div>${review}</div>
+          <hr>`;
+        container.appendChild(div);
+      });
+    }
+
+    // Вставляем после формы, если ещё не вставлен
+    if (!document.getElementById('review-list')) {
+      document.querySelector('.review-form-container').appendChild(container);
+    } else {
+      document.getElementById('review-list').replaceWith(container);
+    }
+  } catch (err) {
+    console.error('Ошибка при загрузке отзывов:', err);
+  }
+}
+
+// 🟢 Старт
+document.addEventListener('DOMContentLoaded', async () => {
+  // Проверяем подключение при загрузке
+  const isConnected = await testConnection();
+  if (!isConnected) {
+    console.error('Не удалось подключиться к базе данных');
+    return;
+  }
+  
+  generateCaptcha();
+  loadReviews();
+});
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
@@ -46,72 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
         reviewForm.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
                 e.preventDefault();
-            }
-        });
-        
-        // Обработка отправки формы
-        reviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value.trim();
-            const rating = document.querySelector('input[name="rating"]:checked');
-            const review = document.getElementById('review').value.trim();
-            const captchaInput = document.getElementById('captcha').value.trim();
-            
-            // Валидация формы
-            if (!name || name.length < 2) {
-                showMessage('Имя должно содержать минимум 2 символа', 'error');
-                return;
-            }
-            
-            if (!rating) {
-                showMessage('Пожалуйста, выберите оценку', 'error');
-                return;
-            }
-            
-            if (!review || review.length < 10) {
-                showMessage('Отзыв должен содержать минимум 10 символов', 'error');
-                return;
-            }
-            
-            if (!captchaInput) {
-                showMessage('Пожалуйста, решите пример', 'error');
-                return;
-            }
-            
-            if (parseInt(captchaInput) !== currentCaptchaAnswer) {
-                showMessage('Неверный ответ на пример', 'error');
-                document.getElementById('captcha').value = '';
-                currentCaptchaAnswer = generateCaptcha();
-                return;
-            }
-            
-            // Создание нового отзыва
-            const reviewCard = createReviewCard(name, rating.value, review);
-            const reviewsGrid = document.querySelector('.reviews-grid');
-            
-            if (reviewsGrid) {
-                reviewsGrid.insertBefore(reviewCard, reviewsGrid.firstChild);
-                
-                // Плавная анимация появления нового отзыва
-                reviewCard.style.opacity = '0';
-                reviewCard.style.transform = 'translateY(-20px)';
-                
-                requestAnimationFrame(() => {
-                    reviewCard.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                    reviewCard.style.opacity = '1';
-                    reviewCard.style.transform = 'translateY(0)';
-                });
-                
-                // Очищаем форму и генерируем новую капчу
-                this.reset();
-                currentCaptchaAnswer = generateCaptcha();
-                
-                // Показываем сообщение об успехе
-                showMessage('Отзыв успешно добавлен!', 'success');
-                
-                // Прокручиваем к новому отзыву
-                reviewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         });
         
