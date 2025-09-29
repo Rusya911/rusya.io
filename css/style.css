@@ -144,6 +144,18 @@ h1 {
   margin-right: auto;
 }
 
+/* Фото в блоке обо мне */
+.about-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0.5rem auto 1rem;
+  box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
+  border: 2px solid var(--border-color);
+}
+
 /* Фичи */
 .features {
   display: grid;
@@ -557,6 +569,14 @@ footer {
   color: var(--text-gray);
 }
 
+/* Располагаем элементы футера столбцом: телефон сверху, VK ниже */
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 .footer-map {
   margin-top: 1rem;
   max-width: 800px;
@@ -652,6 +672,30 @@ footer {
 .footer-links {
   margin-top: 1rem;
   text-align: center;
+}
+
+/* Кликабельный телефон в футере */
+.footer-phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.footer-phone-link:hover {
+  color: var(--primary-green);
+}
+
+/* Единый вид ссылок в футере: иконка слева, текст справа */
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Адаптивность */
