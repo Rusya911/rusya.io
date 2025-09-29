@@ -1169,6 +1169,29 @@ header h1 {
   transition: all 0.3s ease;
 }
 
+/* Улучшаем видимость кликабельного номера телефона */
+.phone-number .phone-link {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: rgba(0, 255, 255, 0.08);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phone-number .phone-link:hover {
+  background: var(--primary-green);
+  color: #000;
+  border-color: var(--primary-green);
+  text-shadow: none;
+}
+
 .header-buttons {
   display: flex;
   gap: 1rem;

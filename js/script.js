@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
   try {
     const phoneEl = document.getElementById('phone');
     if (phoneEl) {
-      phoneEl.innerHTML = '<i class="fas fa-phone" aria-hidden="true"></i> +7(978)059-70-99';
+      const tel = '+79780597099';
+      const display = '<i class="fas fa-phone" aria-hidden="true"></i> +7(978)059-70-99';
+      phoneEl.innerHTML = '<a href="tel:' + tel + '" class="phone-link" aria-label="Позвонить по номеру +7 978 059-70-99">' + display + '</a>';
     }
     
     // Legacy code from the bottom of the page - can be removed if not needed

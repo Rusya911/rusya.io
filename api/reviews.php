@@ -1,8 +1,16 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST');
-header('Access-Control-Allow-Headers: Content-Type');
+
+// Restrict CORS to site origin
+$allowed_origin = 'https://my-pc-master.online';
+if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] === $allowed_origin) {
+    header('Access-Control-Allow-Origin: ' . $allowed_origin);
+} else {
+    // For simple GET without Origin (direct browser visit), do not set wildcard
+    header('Vary: Origin');
+}
+header('Access-Control-Allow-Methods: POST, GET');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 // Путь к базе данных
 $db_path = __DIR__ . '/../db/reviews.db';

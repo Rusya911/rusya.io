@@ -47,17 +47,15 @@ if (typeof window.supabase === 'undefined') {
       expectedCaptchaAnswer = a + b;
       
       captchaQuestion.textContent = `Сколько будет ${a} + ${b}?`;
-      console.log('Капча сгенерирована:', expectedCaptchaAnswer);
     } catch (err) {
       console.error('Ошибка при генерации капчи:', err);
     }
   }
 
   // Форматирование номера телефона
-  console.log('Инициализация обработки телефона...');
+  // Инициализация обработки телефона
 
   function initPhoneInput() {
-    console.log('Поиск элемента ввода телефона...');
     const phoneInput = document.getElementById('phoneInput');
     
     if (!phoneInput) {
@@ -65,12 +63,24 @@ if (typeof window.supabase === 'undefined') {
       return;
     }
     
-    console.log('Элемент ввода телефона найден:', phoneInput);
+    // Префикс страны должен быть статичным и предзаполненным
+    const COUNTRY_PREFIX = '+7';
+    if (!phoneInput.value || !phoneInput.value.startsWith(COUNTRY_PREFIX)) {
+      phoneInput.value = COUNTRY_PREFIX + ' ';
+    }
+
+    // Запрещаем удалять префикс +7
+    phoneInput.addEventListener('keydown', function(e) {
+      const start = this.selectionStart;
+      const prohibitedBackspace = (e.key === 'Backspace' && start <= COUNTRY_PREFIX.length);
+      const prohibitedDelete = (e.key === 'Delete' && start < COUNTRY_PREFIX.length);
+      if (prohibitedBackspace || prohibitedDelete) {
+        e.preventDefault();
+      }
+    });
 
     // Обработка ввода
     phoneInput.addEventListener('input', function() {
-      console.log('Событие input:', this.value);
-      
       let numbers = this.value.replace(/\D/g, '');
 
       // Удаляем первую цифру, если пользователь ввёл 8 или 7 вручную
@@ -82,7 +92,7 @@ if (typeof window.supabase === 'undefined') {
       numbers = numbers.substring(0, 10);
 
       // Форматируем номер
-      let formatted = '+7';
+      let formatted = COUNTRY_PREFIX;
 
       if (numbers.length > 0) {
         formatted += ' (' + numbers.substring(0, 3);
@@ -98,11 +108,15 @@ if (typeof window.supabase === 'undefined') {
       }
 
       this.value = formatted;
+
+      // Если пользователь очистил поле, возвращаем префикс
+      if (this.value === COUNTRY_PREFIX) {
+        this.value = COUNTRY_PREFIX + ' ';
+      }
     });
 
     // Блокируем ввод нецифровых символов
     phoneInput.addEventListener('keypress', function(e) {
-      console.log('Событие keypress:', e.key);
       if (!/\d/.test(e.key)) {
         e.preventDefault();
       }
@@ -110,16 +124,18 @@ if (typeof window.supabase === 'undefined') {
 
     // Обработка вставки
     phoneInput.addEventListener('paste', function(e) {
-      console.log('Событие paste');
       e.preventDefault();
       const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-      console.log('Вставленный текст:', pastedText);
-      this.value = pastedText;
+      let digits = pastedText.replace(/\D/g, '');
+      // Убираем ведущие 7 или 8, чтобы не дублировать +7
+      if (digits.startsWith('7') || digits.startsWith('8')) {
+        digits = digits.substring(1);
+      }
+      this.value = COUNTRY_PREFIX + ' ' + digits;
       // Вызываем событие input для форматирования
       this.dispatchEvent(new Event('input'));
     });
 
-    console.log('Обработчики событий для поля телефона добавлены');
   }
 
   // Инициализация при загрузке DOM
@@ -149,8 +165,7 @@ if (typeof window.supabase === 'undefined') {
         name, 
         rating: parseInt(rating), 
         review, 
-        phone: '+7' + phone.slice(1), // Сохраняем номер в формате +7XXXXXXXXXX
-        created_at: new Date().toISOString()
+        phone: '+7' + phone.slice(1) // Сохраняем номер в формате +7XXXXXXXXXX
       }]);
 
     if (error) {
@@ -198,29 +213,46 @@ if (typeof window.supabase === 'undefined') {
         reviews.forEach(({ name, rating, review, created_at }) => {
           const article = document.createElement('article');
           article.className = 'review-card';
-          
+
           // Форматируем дату
-          const date = new Date(created_at).toLocaleDateString('ru-RU', {
+          const dateStr = new Date(created_at).toLocaleDateString('ru-RU', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit'
           });
 
-          // Создаем звезды рейтинга
-          const stars = Array(5).fill().map((_, i) => 
-            `<i class="fas fa-star${i < rating ? '' : '-half-alt'}"></i>`
-          ).join('');
+          // Заголовок
+          const header = document.createElement('div');
+          header.className = 'review-header';
 
-          article.innerHTML = `
-            <div class="review-header">
-              <div class="review-author">${name}</div>
-              <div class="review-date">${date}</div>
-            </div>
-            <div class="review-rating">
-              ${stars}
-            </div>
-            <p class="review-text">${review}</p>
-          `;
+          const authorEl = document.createElement('div');
+          authorEl.className = 'review-author';
+          authorEl.textContent = name;
+
+          const dateEl = document.createElement('div');
+          dateEl.className = 'review-date';
+          dateEl.textContent = dateStr;
+
+          header.appendChild(authorEl);
+          header.appendChild(dateEl);
+
+          // Рейтинг
+          const starsEl = document.createElement('div');
+          starsEl.className = 'review-rating';
+          for (let i = 0; i < 5; i++) {
+            const iEl = document.createElement('i');
+            iEl.className = i < Number(rating) ? 'fas fa-star' : 'far fa-star';
+            starsEl.appendChild(iEl);
+          }
+
+          // Текст
+          const textEl = document.createElement('p');
+          textEl.className = 'review-text';
+          textEl.textContent = review;
+
+          article.appendChild(header);
+          article.appendChild(starsEl);
+          article.appendChild(textEl);
 
           // Добавляем анимацию появления
           article.style.opacity = '0';
@@ -242,13 +274,11 @@ if (typeof window.supabase === 'undefined') {
 
   // 🟢 Старт
   document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM загружен, инициализация...');
     
     try {
       // Проверяем подключение при загрузке
       const isConnected = await testConnection();
       if (!isConnected) {
-        console.error('Не удалось подключиться к базе данных');
         return;
       }
       
@@ -274,7 +304,7 @@ if (typeof window.supabase === 'undefined') {
               return;
           }
           
-          let currentCaptchaAnswer = generateCaptcha();
+          generateCaptcha();
           
           // Предотвращаем отправку формы при нажатии Enter
           reviewForm.addEventListener('keypress', function(e) {
